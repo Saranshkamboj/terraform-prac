@@ -28,7 +28,7 @@ jobs:
 
       # Azure login using secrets for the UAT environment
       - name: Login to Azure
-        uses: Azure/login@v2.2.0
+        uses: Azure/login@v2
         with:
           client-id: ${{ secrets.SERVICE_PRINCIPAL_ID }}
           tenant-id: ${{ secrets.TENANT_ID }}
