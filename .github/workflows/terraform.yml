@@ -31,10 +31,7 @@ jobs:
       - name: Login to Azure
         uses: Azure/login@v2
         with:
-          client-id: 66d17a9d-7681-4c58-86e6-d4f4fa45995d 
-          tenant-id: e4e34038-ea1f-4882-b6e8-ccd776459ca0
-          client-secret: Qpa8Q~6wQcEjNZrKOcm2enoSQWUTZ.t~dLjWAb9A
-          subscription-id: 23a10725-0f45-4b82-88e0-189c6e8c94a9
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Initialize Terraform
       - name: Terraform Init
