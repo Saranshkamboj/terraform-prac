@@ -1,0 +1,51 @@
+name: Terraform Deploy to Azure (UAT Environment)
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  terraform-uat:
+    runs-on: ubuntu-latest
+
+    environment: uat  # Specifies the UAT environment
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0  # Specify the version of Terraform you are using
+
+      # Azure login using secrets for the UAT environment
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.UAT }}
+
+      # Initialize Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      # Terraform Format (optional but recommended for code consistency)
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      # Terraform Validate
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Terraform Plan (creates an execution plan)
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      # Apply Terraform plan (deploy infrastructure to UAT)
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'  # Apply only on main branch
+        run: terraform apply -auto-approve tfplan
