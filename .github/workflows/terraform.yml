@@ -34,7 +34,7 @@ jobs:
           tenant-id: ${{ secrets.TENANT_ID }}
           client-secret: ${{ secrets.SERVICE_PRINCIPAL_KEY }}
           subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-          auth-type: 'sp'
+          auth-type: 'servicePrincipal'
 
       # Initialize Terraform
       - name: Terraform Init
