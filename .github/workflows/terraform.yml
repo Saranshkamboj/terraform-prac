@@ -5,10 +5,6 @@ on:
     branches:
       - master
   workflow_dispatch:
-
-permissions:
-  id-token: write
-  contents: read
   
 jobs:
   terraform-uat:
@@ -29,7 +25,7 @@ jobs:
 
       # Azure login using secrets for the UAT environment
       - name: Login to Azure
-        uses: Azure/login@v2
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
