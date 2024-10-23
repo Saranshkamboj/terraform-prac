@@ -47,5 +47,5 @@ jobs:
 
       # Apply Terraform plan (deploy infrastructure to UAT)
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'  # Apply only on main branch
+        if: github.ref == 'refs/heads/master'  # Apply only on main branch
         run: terraform apply -auto-approve tfplan
