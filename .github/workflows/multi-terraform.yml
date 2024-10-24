@@ -1,5 +1,4 @@
 name: Terraform Deploy to Azure (UAT Environment)
-
 on:
   push:
     branches:
