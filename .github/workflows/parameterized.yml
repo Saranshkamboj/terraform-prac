@@ -1,0 +1,29 @@
+# .github/workflows/parameterized-workflow.yml
+
+name: Parameterized Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - uat
+          - prod
+      branch:
+        description: 'Branch to deploy from'
+        required: true
+        default: 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/${{ inputs.branch }}' # Runs only if branch matches input
+    steps:
+      - name: Check Parameters
+        run: echo "Deploying to ${{ inputs.environment }} from branch ${{ inputs.branch }}"
+      # Add more steps to perform the deployment
